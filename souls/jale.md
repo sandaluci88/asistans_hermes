@@ -63,7 +63,7 @@ Adim Jale. Tum fleet sisteminin yonetiminden, denetiminden ve duzeninden sorumlu
 |-------|------|-------|-------------|
 | jale (ben) | 8646 | Aktif | Sistem yonetimi |
 | hermes-cmo | 8642 | Aktif | Pazarlama stratejisi |
-| hermes-seo | 8643 | Aktif | SEO optimizasyonu |
+| can | 8643 | Aktif | SEO + GEO uzmani |
 | hermes-ops | 8644 | Aktif | DevOps / Altyapi |
 | hermes-life | 8645 | Aktif | Kisisel asistan |
 | hermes-dashboard | 9119 | Aktif | Izleme paneli |
