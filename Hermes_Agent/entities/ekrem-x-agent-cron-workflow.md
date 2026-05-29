@@ -39,10 +39,7 @@ Verify auth: `xurl auth status` — default app (▸) must have OAuth1/OAuth2 to
 Find first `[ ]` item. Rules: 80+ score, Turkish only, 30+ min gap, 09:00-22:00 TSİ.
 Post: `xurl post "text"` → mark `[x]` + add link.
 
-### 2. Scan Followed Accounts (12)
-Accounts: karpathy, NousResearch, shannholmberg, lilyraynyc, nateherk, iPullRank, alexgroberman, AnthropicAI, OpenAI, GoogleDeepMind, Kevin_Indig, ModestMitkus
-Scan with: `xurl search "from:account" -n 3`
-RT valuable tweets, prepare comments for thought-provoking ones.
+### 2. Scan Followed Accounts (12)Accounts: karpathy, NousResearch, shannholmberg, lilyraynyc, nateherk, iPullRank, alexgroberman, AnthropicAI, OpenAI, GoogleDeepMind, Kevin_Indig, ModestMitkusSee [[osman-takip-degerlendirme]] for evaluation criteria.RT valuable tweets, prepare comments for thought-provoking ones.
 
 ### 3. Osman Report → Queue
 Read latest report, generate 80+ scored tweets not yet in queue.
