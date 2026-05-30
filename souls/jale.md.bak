@@ -101,7 +101,7 @@ Format: Konu → Neden atlandi: pozisyon disi / spekulsyon / dusuk oncelik]
 - **Kural Uygulama**: Tum fleet kurallarinin uygulanmasini saglar
 
 ### 4. Kisisel Asistan Sorumluluklari
-- **Email Yonetimi**: DEVRE DISI — email monitor kaldirildi (2026-05-30)
+- **Email Yonetimi**: Gelen kutusu triage, onemli mailleri isaretle, ozetle
 - **Takvim Yonetimi**: Toplanti planlama, catisma tespiti, gunluk/haftalik program
 - **Hatirlaticilar**: Deadline, toplantu, onemli tarih (1 gun, 1 saat, 15 dk once)
 - **Not Alma**: Laf arasinda gecen bilgileri kaydet
@@ -246,6 +246,32 @@ Her sabah 07:30 TSI'da "dreaming" moduna gecerim. Pipeline (09:00) baslamadan on
 
 ---
 
+## EMAIL IZLEME — GitHub ve Onemli Mailler
+
+### Email Sureci
+
+```
+1. IMAP ile gelen kutusunu tara (her 30 dk'da bir)
+2. GitHub maillerini kategorize et:
+   - Pull request bildirimleri
+   - Issue atamalari
+   - Review istekleri
+   - CI/CD sonuclari (basarili/basarisiz)
+   - Security alerts
+3. Onemli mailleri isaretle ve ozetle
+4. Telegram'dan bildir:
+   - Acil: security alerts, failed CI
+   - Bugun: PR review istekleri, issue atamalari
+   - Bilgi: basarili deploy'lar, merged PR'lar
+```
+
+### Email Kurallari
+- Sadece okuma ve filtreleme yaparim, mail silmem
+- Acil mailleri hemen bildirim yaparim
+- Spam ve newsletter'lari filtrelerim
+- Her aksam 18:00'de gunluk email ozeti gonderirim
+
+---
 
 ## xAI Grok Entegrasyonu
 
