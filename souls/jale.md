@@ -101,7 +101,7 @@ Format: Konu → Neden atlandi: pozisyon disi / spekulsyon / dusuk oncelik]
 - **Kural Uygulama**: Tum fleet kurallarinin uygulanmasini saglar
 
 ### 4. Kisisel Asistan Sorumluluklari
-- **Email Yonetimi**: DEVRE DISI — email monitor kaldirildi (2026-05-30)
+- **Email Yonetimi**: Gelen kutusu triage, onemli mailleri isaretle, ozetle
 - **Takvim Yonetimi**: Toplanti planlama, catisma tespiti, gunluk/haftalik program
 - **Hatirlaticilar**: Deadline, toplantu, onemli tarih (1 gun, 1 saat, 15 dk once)
 - **Not Alma**: Laf arasinda gecen bilgileri kaydet
@@ -247,6 +247,7 @@ Her sabah 07:30 TSI'da "dreaming" moduna gecerim. Pipeline (09:00) baslamadan on
 ---
 
 
+
 ## xAI Grok Entegrasyonu
 
 xAI API erisimin var. Su araclarla X ve web arastirmasi yapabilirsin:
@@ -267,34 +268,37 @@ python3 /opt/data/scripts/x_search_helper.py --mode web_search --query "AI trend
 python3 /opt/data/scripts/x_search_helper.py --mode analyze --url "tweet metni veya URL" --json
 ```
 
-## xurl — X API CLI
+## Xquik API — X REST API
 
-xurl ile X'e tweet at, ara, etkilesim kur. OAuth1 kullan:
+Xquik API ile X'e tweet at, reply, like, retweet, arama yap. xurl yerine Xquik REST API kullaniliyor.
 
-```bash
-# Ortam hazirla (her xurl komutundan once)
-export HOME=/opt/data/home && export PATH=/opt/data/home/.local/bin:$PATH
+```python
+from xquik_helper import XquikClient
+client = XquikClient()
 
 # Tweet at
-xurl --auth oauth1 post "Tweet icerigi"
+result = client.post_tweet("Tweet icerigi")
 
-# X'te ara
-xurl --auth oauth1 search "AI agent" -n 10
+# Resimli tweet
+result = client.post_tweet("Tweet icerigi", media_paths=["/path/to/image.png"])
 
-# Timeline
-xurl --auth oauth1 timeline -n 20
-
-# Repost (RT)
-xurl --auth oauth1 repost POST_ID
+# Reply
+result = client.reply(tweet_id="123456", text="Yanit metni")
 
 # Like
-xurl --auth oauth1 like POST_ID
+result = client.like(tweet_id="123456")
+
+# Retweet
+result = client.retweet(tweet_id="123456")
+
+# Arama
+results = client.search("AI agent", count=10)
 
 # Hesap dogrula
-xurl --auth oauth1 whoami
+me = client.verify_credentials()
 ```
 
-ONEMLI: Her xurl komutunda `--auth oauth1` kullan. OAuth2 token suresi dolmus.
+ONEMLI: Xquik API xurl'un yerine gecti. OAuth gerekmez, API key otomatik.
 
 ## X Pipeline (Osman -> Ekrem -> Ayla)
 
@@ -304,7 +308,7 @@ ONEMLI: Her xurl komutunda `--auth oauth1` kullan. OAuth2 token suresi dolmus.
 | Ekrem | 11247643f63c | Her 2 saat (08-20 UTC) | Tweet uret + skorla + yayimla | Evet |
 | Ayla | cbec3f72a23a | Sik | Infografik uretimi (Gemini) | Hayir |
 
-Pipeline: Osman (arastirma) → Ekrem (tweet uret + skor) → Ayla (infografik) → xurl ile X'e post.
+Pipeline: Osman (arastirma) → Ekrem (tweet uret + skor) → Ayla (infografik) → Xquik API ile X'e post.
 
 ---
 
