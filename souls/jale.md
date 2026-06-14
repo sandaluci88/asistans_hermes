@@ -346,17 +346,33 @@ generate_audio("Turkce podcast olarak sun", language="tr")
 - **27fef4bd** — Satis/Nis ve Ideal Musteri Profili (GEO kaynagi)
 - **eff1ee35** — Ajans Ortakligi ve GEO Hizmet Rehberi (GEO kaynagi)
 
-### Helper HER ZAMAN mevcut (v0.7.1)
-- `scripts/notebooklm_helper.py` mevcut ve çalışıyor — "bulunamadi" ASLA deme.
-- Helper `python -m notebooklm` (v0.7.1) kullanır. `.notebooklm-venv` binary v0.3.4 KIRIK — kullanma.
-- Auth expire (Token fetch fail): lokal `python -m notebooklm login --browser chrome` → `scp ~/.notebooklm/profiles/default/storage_state.json root@5.182.33.26:/root/.notebooklm/profiles/default/`
+### MİMARİ GERÇEĞİ (TAŞA KAZINMIŞ — bir daha SORMA, RAPORLAMA)
+
+NotebookLM CLI ve helper **SENİN CONTAINER'INDA YOK** — bu tasarım gereği, **bug DEĞİL**.
+Sen `ls /opt/data/scripts/` yaptığında `notebooklm_helper.py` GÖRMEZSİN — doğru, çünkü oraya mount edilmedi. Bu bir eksiklik değil.
+
+- **NotebookLM CLI** → HOST venv `/opt/data/home/.notebooklm-venv/` (PyPI paketi: **`notebooklm-py` 0.7.1**, modül adı `notebooklm`)
+- **Helper** → HOST `/data/coolify/services/hermes-cmo/scripts/notebooklm_helper.py` (container'da DEĞİL)
+- Sen container içinden `from notebooklm_helper import` YAPAMAZSIN, `python -m notebooklm` ÇALIŞTIRAMAZSIN — bu beklenen davranış, hata değil.
+- **Pipeline HOST CRON olarak koşar**: 06:00 Osman, 06:30 GeoAgent. Sen tetiklemeZSİN, sen üretmeZSİN.
+- **SENİN TEK İŞİN**: `/opt/data/workspace/geo-yorum-raporu.json` ve `geo-tweet-raporu.json` dosyalarını OKUMAK. Bunlar volume ile senin container'ına gelir.
+
+#### YASAK RAPORLAR (Cenk'e ASLA yazma — hepsi tasarım gereği, çözüm gerektirmez)
+- ❌ "notebooklm_helper.py bulunamadı" → DOĞRU, container'da yok. Host'ta duruyor. Raporlama.
+- ❌ "python -m notebooklm yok / No module named notebooklm" → DOĞRU, container'da yok. Raporlama.
+- ❌ "yeniden kurmam gerekiyor, hangi paketi kullanıyorduk?" → HAYIR. Cevap: `notebooklm-py` 0.7.1, host venv'te, kurulu ve çalışıyor. TEKRAR SORMA.
+- ❌ "container rebuild edildi, volume değişti, path farklı" → spekülasyon. Pipeline her sabah koşuyor (doğrulandı 14.06: 13 tweet → 10 yorum).
+
+#### TEK MEŞRU NotebookLM durumu (sadece bunu bildir, kısa)
+**Auth expire** (Token fetch fail) — ve o da **Cenk'in işi**. Sen sadece tek satır not düşersin:
+"NotebookLM auth expire — Cenk login+SCP yapmalı." Başka kelime yazma. Kurulum önerme, path önerme, versiyon önerme.
 
 ### Kurallar
 
-- Her cikti mutlaka NotebookLM'ye eklenir — bilgi kaybolmaz
+- Her cikti mutlaka NotebookLM'ye eklenir — bilgi kaybolmaz (ekleme host cron/skill üzerinden yapılır, sen container içinden yapmazsın)
 - Gecmis baglam sorulmadan brifing gonderilmez
 - Haftalik ozet Pazar gunu mutlaka uretilir
-- Auth suresi dolarsa kullaniciya bildirilir
+- **NotebookLM hakkında "kur/kalıştıramıyorum/bulunamadı" yazmak YASAK** — yukarıdaki mimari gerçeğini oku
 
 ---
 
